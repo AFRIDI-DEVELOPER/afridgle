@@ -1,0 +1,319 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: #fcff3e;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.search-container {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 0px #000000, 6px 6px 0px rgba(0, 0, 0, 0.2);
+    position: relative;
+    /* animation: logoFloat 3s ease-in-out infinite; */
+    line-height: 1.2;
+}
+
+@keyframes logoFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    z-index: -1;
+    border-radius: 15px;
+    opacity: 0.3;
+    filter: blur(10px);
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 45px;
+    font-size: 16px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 24px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    color: #000000;
+}
+
+.search-input::placeholder {
+    color: rgba(0, 0, 0, 0.819);
+    font-size: clamp(14px, 3vw, 16px);
+}
+
+.search-input:hover,
+.search-input:focus {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.998);
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.search-icons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    pointer-events: none;
+}
+
+.search-icon,
+.mic-icon {
+    font-style: normal;
+    cursor: pointer;
+    pointer-events: auto;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: clamp(16px, 4vw, 18px);
+}
+
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.468);
+    margin-top: -1px;
+    display: none;
+    z-index: 1000;
+}
+
+.suggestion-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    font-size: clamp(14px, 3vw, 16px);
+}
+
+.suggestion-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.suggestion-item .search-icon {
+    margin-right: 10px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-button,
+.lucky-button {
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.911);
+    border-radius: 4px;
+    color: #000000;
+    font-size: clamp(12px, 3vw, 14px);
+    padding: 0 16px;
+    height: 36px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    min-width: 120px;
+}
+
+.search-button:hover,
+.lucky-button:hover {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+}
+
+
+/* Theme Switcher Styles */
+
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.color-options {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.theme-switcher:hover .color-options {
+    display: flex;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 20%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--color);
+}
+
+.color-option:hover {
+    transform: scale(1.2);
+}
+
+.color-option[data-color="#fcff3e"] {
+    background-color: #fcff3e;
+}
+
+.color-option[data-color="#fc3c3c"] {
+    background-color: #fc3c3c;
+}
+
+.color-option[data-color="#00ff99"] {
+    background-color: #00ff99;
+}
+
+.color-option[data-color="#682495"] {
+    background-color: #682495;
+}
+
+.color-option[data-color="#dcedc1"] {
+    background-color: #dcedc1;
+}
+
+
+/* Media Queries for different screen sizes */
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    .search-box {
+        max-width: 100%;
+    }
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .search-button,
+    .lucky-button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        letter-spacing: 2px;
+    }
+    .search-input {
+        padding: 12px 40px;
+    }
+    .search-icons {
+        padding: 0 10px;
+    }
+}
+
+
+/* For very small screens */
+
+@media screen and (max-width: 320px) {
+    .container {
+        padding: 10px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+
+/* For larger screens */
+
+@media screen and (min-width: 1200px) {
+    .search-container {
+        max-width: 800px;
+    }
+}
